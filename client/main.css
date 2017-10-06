@@ -1,0 +1,8 @@
+.login-link-text, .login-close-text, .additional-link {
+  text-decoration: none !important;
+  font-weight: bold;
+}
+
+body {
+  background: khaki;
+}
