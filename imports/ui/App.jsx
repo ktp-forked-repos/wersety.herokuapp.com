@@ -18,23 +18,18 @@ class App extends Component {
   }
 
   // ta funkcja to jest przydatna tylko jak dodaję nowy przekład do bazy,
-  // bo jeśli są różnice numeracji wersetów to trzeba to popoprawiać wtedy
+  // bo jeśli są różnice numeracji wersetów to trzeba zsynchronizować ze standardem KJV/UBG wtedy
   openNextBrokenChapter() {
     let book = this.props.chapters[this.state.brokenChapter].b;
     let chapter = this.props.chapters[this.state.brokenChapter].c;
 
     let windows = Session.get('windows');
 
-    let translacje = [2,1,3,4,5,6,13,14,15,16,17,25];
+    // tlumaczenia ktore były do poprawki (już poprawiłem)
+    let translacje = [2, 1, 3, 4, 5, 6, 13, 14, 15, 16, 17, 25];
 
     translacje.forEach(function(translation) {
-      windows.push({
-        t: translation,
-        b: book,
-        c: chapter,
-        v: 0,
-        v2: 0
-      });
+      windows.push({t: translation, b: book, c: chapter, v: 0, v2: 0});
     });
 
     Session.set('windows', windows);
@@ -47,13 +42,8 @@ class App extends Component {
   // otwiera nowe okno po kliknięciu w przycisk
   openNewWindow() {
     let windows = Session.get('windows');
-    windows.push({
-      t: 1,
-      b: 19,
-      c: 142,
-      v: 0,
-      v2: 0
-    });
+    // akurat psalm 142 ustawiłem na otwarcie, ale potem zmienie na losowe
+    windows.push({t: 1, b: 19, c: 142, v: 0, v2: 0});
     Session.set('windows', windows);
   }
 
@@ -62,15 +52,22 @@ class App extends Component {
     return (
       <div className="body">
 
-        {/*<div className="menu"><AccountsUIWrapper /></div>*/}
+        {/*
+          na razie rejestracja/logowanie zbędne, ale przy rozbudowie dodam
+          <div className="menu"><AccountsUIWrapper /></div>
+        */}
 
-        <div className="header"><a href=""><img src="/blackandwhitelogo.svg"/><span>Wersety.com</span></a></div>
+        <div className="header">
+          <a href=""><img src="/blackandwhitelogo.svg"/>
+            <span>Wersety.com</span>
+          </a>
+        </div>
 
         {this.renderWindows()}
 
         <div className="menu">
           <button className="green" onClick={() => {
-            if(this.state.admin) {
+            if (this.state.admin) {
               this.openNextBrokenChapter();
             } else {
               this.openNewWindow();
@@ -79,12 +76,11 @@ class App extends Component {
             <i className="fa fa-plus"></i>
             Otwórz nowe okno</button>
 
-          {this.props.verses.length > 0 &&
-            <button className="red" onClick={() => {
-              Session.set('windows', new Array());
-            }}>
-              <i className="fa fa-remove"></i>
-              Zamknij wszystkie okna</button>
+          {this.props.verses.length > 0 && <button className="red" onClick={() => {
+            Session.set('windows', new Array());
+          }}>
+            <i className="fa fa-remove"></i>
+            Zamknij wszystkie okna</button>
           }
 
         </div>
@@ -108,8 +104,7 @@ class App extends Component {
           params={Session.get('windows')[index]}
           translations={this.props.translations}
           books={this.props.books}
-          admin={this.state.admin}
-        />
+          admin={this.state.admin}/>
       );
     });
   }
@@ -123,27 +118,28 @@ class App extends Component {
 export default AppContainer = withTracker(props => {
 
   // domyślnie, na otwarcie aplikacji nie ma okien żadnych
+  // ale póżniej dorobię, że coś losowego się otworzy na start
   let windows = new Array();
   Session.setDefault('windows', windows);
 
   // wszystkie tlumaczenia i ksiazki subskrybujemy
   Meteor.subscribe('translations');
   Meteor.subscribe('books');
-
-  // rozdziały subskrybujemy tylko w procesie korekty numeracji nowych przekładów,
-  // w innych przypadkach jest to zbędne (usuń to później)
   Meteor.subscribe('chapters');
 
   // budowanie zapytań do bazy danych na podstawie tego co otworzone w okienkach
   let queries = new Array;
   Session.get('windows').map((w) => {
     let q = new Object;
-    if(w.t > 0) q.t = w.t;
+    if (w.t > 0)
+      q.t = w.t;
     q.b = w.b;
-    if(w.v2 == 0) {
+    if (w.v2 == 0) {
       q.c = w.c;
-      if(w.v > 0) q.v = w.v;
-    } else if(w.v2 > 0) {
+      if (w.v > 0)
+        q.v = w.v;
+      }
+    else if (w.v2 > 0) {
       q.c = w.c;
       q.v = {
         $gte: w.v,
@@ -153,11 +149,14 @@ export default AppContainer = withTracker(props => {
       q.$or = [
         {
           c: w.c,
-          v:{$gte: w.v}
-        },
-        {
+          v: {
+            $gte: w.v
+          }
+        }, {
           c: (w.c + 1),
-          v:{$lte: (-w.v2)}
+          v: {
+            $lte: (-w.v2)
+          }
         }
       ];
     }
@@ -165,32 +164,33 @@ export default AppContainer = withTracker(props => {
   })
 
   // subskrybujemy tylko te wersety, jakie sa w okienkach otwarte
-  Meteor.subscribe(
-    'verses',
-    { $or: queries },
-    () => { this.openNewWindow(); }
-  );
+  Meteor.subscribe('verses', {$or: queries});
 
   // pakujemy poszczególne wersety do odpowiadających im okienek
   let verses = new Array;
-  queries.map(query =>
-    verses.push(Verses.find(query, {
-      sort: {
-        t: 1,
-        b: 1,
-        c: 1,
-        v: 1
-      }
-    }).fetch())
-  );
+  queries.map(query => verses.push(Verses.find(query, {
+    sort: {
+      t: 1,
+      b: 1,
+      c: 1,
+      v: 1
+    }
+  }).fetch()));
 
   // zwracamy posortowane tłumaczenia, księgi, wersety, użytkownika
-  return {
-    translations: Translations.find({}, { sort: { _id: 1 } }).fetch(),
-    books: Books.find({}, { sort: { _id: 1 } }).fetch(),
-    verses: verses,
-    currentUser: Meteor.user(),
-    chapters: Chapters.find({}, { sort: { b: 1, c: 1 } }).fetch(),
-  };
+  return {translations: Translations.find({}, {
+      sort: {
+        _id: 1
+      }
+    }).fetch(), books: Books.find({}, {
+      sort: {
+        _id: 1
+      }
+    }).fetch(), verses: verses, currentUser: Meteor.user(), chapters: Chapters.find({}, {
+      sort: {
+        b: 1,
+        c: 1
+      }
+    }).fetch()};
 
 })(App);

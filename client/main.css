@@ -10,14 +10,13 @@
 
 body {
   background: lightgray;
-  min-height: 100%;
-  //background: dimgray;
+  min-height: 100%; //background: dimgray;
   padding: 0px;
   margin: 0px;
 }
 
 .footer, .header {
-  text-align:center;
+  text-align: center;
   vertical-align: middle;
 }
 
@@ -33,7 +32,7 @@ body {
   font-size: 20px;
   color: white;
   text-decoration: none;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .header a * {
@@ -41,8 +40,8 @@ body {
 }
 
 .header a img {
-    margin-right: 6px;
-    height: 20px;
+  margin-right: 6px;
+  height: 20px;
 }
 
 body, form, button, input, textarea, button, select, option {
@@ -51,10 +50,12 @@ body, form, button, input, textarea, button, select, option {
 }
 
 select {
-    min-width: 24px;
-    appearance:none;
-    -moz-appearance:none; /* Firefox */
-    -webkit-appearance:none; /* Safari and Chrome */
+  min-width: 24px;
+  appearance: none;
+  -moz-appearance: none;
+  /* Firefox */
+  -webkit-appearance: none;
+  /* Safari and Chrome */
 }
 
 .chaptersSelect {
@@ -74,7 +75,7 @@ select {
 }
 
 .capitalize {
-  text-transform:capitalize;
+  text-transform: capitalize;
 }
 
 .verse {
@@ -83,7 +84,7 @@ select {
 
 .window {
   background: white;
-  box-shadow: 2px 2px 2px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
   padding: 0px;
   margin: 8px;
 }
@@ -95,7 +96,7 @@ select {
 }
 
 form {
-  background:whitesmoke;
+  background: whitesmoke;
 }
 
 .body {
@@ -111,18 +112,14 @@ form {
 select, input, button {
   background: #303030;
   border-radius: 0px;
-  box-shadow:
-    inset -5px -5px 10px rgba(0,0,0,0.1),
-    inset 5px 5px 10px rgba(255,255,255,0.1),
-    1px 1px 1px rgba(0,0,0,0.2);
-  text-shadow: 1px 1px 0px rgba(0,0,0,1);
-  color:white;
+  box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.1), inset 5px 5px 10px rgba(255, 255, 255, 0.1), 1px 1px 1px rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 1);
+  color: white;
   padding: 4px;
   margin: 0px;
   outline: none;
   border: none;
 }
-
 
 .green {
   background: #00c000;
@@ -149,13 +146,8 @@ i {
   margin-left: 3px;
 }
 
-select:not([disabled]):hover,
-input:not([disabled]):hover,
-button:not([disabled]):hover
-{
-  box-shadow: inset -5px -5px 15px rgba(255,255,255,0.1),
-  inset 5px 5px 15px rgba(0,0,0,0.1),
-  1px 1px 1px rgba(0,0,0,0.2);
+select:not([disabled]):hover, input:not([disabled]):hover, button:not([disabled]):hover {
+  box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.1), 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 button {
@@ -175,14 +167,14 @@ form {
 }
 
 .verseLocation {
-  color:rgba(0,0,0,0.5);
+  color: rgba(0, 0, 0, 0.5);
   user-select: none;
   cursor: default;
 }
 
 hr {
   border: 1px black solid;
-  border-color: rgba(0,0,0,0.2) rgba(0,0,0,0) rgba(255,255,255,0.2) rgba(0,0,0,0);
+  border-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0) rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0);
   display: none;
 }
 
@@ -207,7 +199,7 @@ hr {
 }
 
 .flag-icon {
-  box-shadow: inset 1px 1px 1px rgba(0,0,0,0.2);
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.2);
   border-radius: 100%;
   border: 1px solid darkgray;
   width: 15px !important;
