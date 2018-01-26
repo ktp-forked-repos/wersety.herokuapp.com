@@ -3,6 +3,240 @@
   font-weight: bold;
 }
 
+.login-link-text {
+  font-size: 13px !important;
+  font-weight: normal !important;
+}
+
 body {
-  background: khaki;
+  background: lightgray;
+  min-height: 100%;
+  //background: dimgray;
+  padding: 0px;
+  margin: 0px;
+}
+
+.footer, .header {
+  text-align:center;
+  vertical-align: middle;
+}
+
+.header {
+  padding-top: 5px;
+}
+
+.footer {
+  padding-bottom: 5px;
+}
+
+.header a {
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+}
+
+.header a * {
+  vertical-align: middle;
+}
+
+.header a img {
+    margin-right: 6px;
+    height: 20px;
+}
+
+body, form, button, input, textarea, button, select, option {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+select {
+    min-width: 24px;
+    appearance:none;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+}
+
+.chaptersSelect {
+  min-width: 32px;
+}
+
+.versesSelect {
+  min-width: 35px;
+}
+
+.verses2Select {
+  min-width: 63px;
+}
+
+.undoSelect {
+  min-width: 163px;
+}
+
+.capitalize {
+  text-transform:capitalize;
+}
+
+.verse {
+  //margin: 2px;
+}
+
+.window {
+  background: white;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.1);
+  padding: 0px;
+  margin: 8px;
+}
+
+.menu {
+  padding: 0px;
+  margin: 8px;
+  text-align: center;
+}
+
+form {
+  background:whitesmoke;
+}
+
+.body {
+  margin: auto;
+  max-width: 1000px;
+  min-height: 100%;
+}
+
+.verses {
+  padding: 5px;
+}
+
+select, input, button {
+  background: #303030;
+  border-radius: 0px;
+  box-shadow:
+    inset -5px -5px 10px rgba(0,0,0,0.1),
+    inset 5px 5px 10px rgba(255,255,255,0.1),
+    1px 1px 1px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 0px rgba(0,0,0,1);
+  color:white;
+  padding: 4px;
+  margin: 0px;
+  outline: none;
+  border: none;
+}
+
+
+.green {
+  background: #00c000;
+}
+
+.red {
+  background: #c00000;
+}
+
+.blue {
+  background: #0000c0;
+}
+
+.black {
+  //background: steelblue;
+}
+
+.right {
+  float: right;
+}
+
+i {
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+select:not([disabled]):hover,
+input:not([disabled]):hover,
+button:not([disabled]):hover
+{
+  box-shadow: inset -5px -5px 15px rgba(255,255,255,0.1),
+  inset 5px 5px 15px rgba(0,0,0,0.1),
+  1px 1px 1px rgba(0,0,0,0.2);
+}
+
+button {
+  padding: 4px 8px 4px 8px;
+}
+
+select, button {
+  cursor: pointer;
+}
+
+:disabled {
+  cursor: not-allowed;
+}
+
+form {
+  padding: 0px;
+}
+
+.verseLocation {
+  color:rgba(0,0,0,0.5);
+  user-select: none;
+  cursor: default;
+}
+
+hr {
+  border: 1px black solid;
+  border-color: rgba(0,0,0,0.2) rgba(0,0,0,0) rgba(255,255,255,0.2) rgba(0,0,0,0);
+  display: none;
+}
+
+.bookAbbv {
+  text-transform: capitalize;
+}
+
+.newline .verse {
+  display: block;
+  margin: 0px;
+  padding: 0px;
+}
+
+.translationName {
+  color: darkgray;
+  vertical-align: middle;
+}
+
+.translationName * {
+  margin: 5px;
+  vertical-align: middle;
+}
+
+.flag-icon {
+  box-shadow: inset 1px 1px 1px rgba(0,0,0,0.2);
+  border-radius: 100%;
+  border: 1px solid darkgray;
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.verse form {
+  display: inline-block;
+  background: none;
+}
+
+.verse form button {
+  margin: 1px;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.editVerse {
+  width: calc(100% - 170px);
+  height: 22px;
+  vertical-align: middle;
+  float: right;
+}
+
+.editVerse textarea {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  vertical-align: middle;
+  font-size: 11px;
 }
